@@ -43,7 +43,7 @@ void delete_end_node(stack_t **stack)
 {
 	stack_t *del = NULL;
 
-	*del = stack;
+	del = *stack;
 	if ((*stack)->next == NULL)
 	{
 		*stack = NULL;

@@ -2,9 +2,9 @@
 /**
  * f_pstr - prints the string of ascii characters
  * @stack: pointer to the head of the linked list
- * @line_number: bytecode number
+ *
  */
-void f_pstr(stack_t **stack, unsigned int line_number)
+void f_pstr(stack_t **stack)
 {
 	stack_t *temp;
 

@@ -23,7 +23,7 @@ void f_add(stack_t **stack, unsigned int line_number)
  */
 void f_sub(stack_t **stack, unsigned int line_number)
 {
-	if (*stack == NULL || (*h)->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
 		printf("L%u: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);

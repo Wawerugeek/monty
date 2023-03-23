@@ -7,21 +7,19 @@
 void (*get_op_func(char *token1))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t instruction_s[] = {
-		{"push", push},
-		{"pop", pop},
-		{"pall", pall},
-		{"pint", pint},
-		{"swap", swap},
-		{"add", add},
-		{"sub", sub},
-		{"mul", mul},
-		{"div", div},
-		{"mod", mod},
-		{"pchar", pchar},
-		{"pstr", pstr},
-		{"nop", nop},
-		{"rot1", rot1},
-		{"rotr", rotr},
+		{"pop", f_pop},
+		{"pall", f_pall},
+		{"pint", f_pint},
+		{"swap", f_swap},
+		{"add", f_add},
+		{"sub", f_sub},
+		{"mul", f_mul},
+		{"div",f_div},
+		{"mod", f_mod},
+		{"pchar", f_pchar},
+		{"nop", f_nop},
+		{"rot1", f_rotl},
+		{"rotr", f_rotr},
 		{NULL, NULL}
 	};
 	int i = 0;
