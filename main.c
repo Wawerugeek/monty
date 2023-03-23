@@ -1,4 +1,5 @@
 #include "monty.h"
+bus_t bus = {NULL, NULL, NULL, 0};
 /**
  * main - entry to the interpreter
  * @argc: argument counter
@@ -8,10 +9,12 @@
 int main(int argc, char *argv[])
 {
 	int fd, ispush = 0;
-	unsigned int line = 0;
-	ssize_t n_read;
-	char *buffer, *token;
-	stack_t *h = NULL;
+	unsigned int line, counter = 0;
+	ssize_t n_read, read_line = 1;
+	size_t size = 0;
+	char *buffer, *token, *content;
+	FILE *file;
+	stack_t *h, *stack = NULL;
 
 	if (argc != 2)
 	{
@@ -19,12 +22,22 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	fd = open(argv[1], O_RDONLY);
+	file = fopen(argv[1], "r");
+	bus.file = file;
+
+	if (!file)
+	{
+		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
+		exit(EXIT_FAILURE);
+	}
+
 	if (fd == -1)
 	{
 		printf("Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	buffer = malloc(sizeof(char) * 10000);
+
 	if (!buffer)
 		return (0);
 	n_read = read(fd, buffer, 1000);
@@ -70,5 +83,19 @@ int main(int argc, char *argv[])
 	free_dlist(&h);
 	free(buffer);
 	close(fd);
-	return (0);
+	while (read_line > 0)
+	{
+		content = NULL;
+		read_line = getline(&content, &size, file);
+		bus.content = content;
+		counter++;
+		if (read_line > 0)
+		{
+			execute(content, &stack, counter, file);
+		}
+		free(content);
+	}
+	free_stack(stack);
+	fclose(file);
+return (0);
 }
