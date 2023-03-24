@@ -81,7 +81,7 @@ void addqueue(stack_t **head, int n);
 void f_queue(stack_t **head, unsigned int counter);
 void f_stack(stack_t **head, unsigned int counter);
 void (*get_op_func(char *token1))(stack_t **stack, unsigned int line_number);
-
+size_t getline(char **lineptr, size_t *size, FILE *file);
 /** doubly linked list prototypes */
 int add_end_node(stack_t **stack, int n);
 void delete_end_node(stack_t **stack);
