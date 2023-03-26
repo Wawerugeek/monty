@@ -4,13 +4,14 @@
  * @stack: pointer to the head of the linked list
  *
  */
-void f_pstr(stack_t **stack)
+void f_pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp;
 
 	if (!stack || !*stack)
 	{
-		printf("\n");
+		printf("L%u: can't pchar, stack empty\n", line_number);
+		exit(EXIT_FAILURE);
 	}
 	temp = *stack;
 	while ((temp != NULL) && (temp->n != 0) &&

@@ -55,32 +55,26 @@ typedef struct instruction_s
 } instruction_t;
 
 /** function prototypes */
-char *_realloc(char *ptr, unsigned int old_size, unsigned int new_size);
-ssize_t getstdin(char **lineptr, int file);
-char  *clean_line(char *content);
 void f_push(stack_t **stack, unsigned int line_number, const char *n);
 void f_pall(stack_t **stack, unsigned int line_number);
-void f_pint(stack_t **head, unsigned int number);
-int execute(char *content, stack_t **head, unsigned int counter, FILE *file);
-void free_stack(stack_t *head);
+void f_pint(stack_t **stack, unsigned int line_number);
 void f_pop(stack_t **stack, unsigned int line_number);
-void f_swap(stack_t **head, unsigned int counter);
+void f_swap(stack_t **stack, unsigned int line_number);
 void f_add(stack_t **stack, unsigned int line_number);
-void f_nop(stack_t **head, unsigned int counter);
+void f_nop(stack_t **stack, unsigned int line_number);
 void f_sub(stack_t **stack, unsigned int line_number);
-void f_div(stack_t **head, unsigned int counter);
+void f_div(stack_t **stack, unsigned int line_number);
 void f_mul(stack_t **stack, unsigned int line_number);
-void f_mod(stack_t **head, unsigned int counter);
-void f_pchar(stack_t **head, unsigned int counter);
-void f_pstr(stack_t **stack);
-void f_rotl(stack_t **head, unsigned int counter);
+void f_mod(stack_t **stack, unsigned int line_number);
+void f_pchar(stack_t **stack, unsigned int line_number);
+void f_pstr(stack_t **stack, unsigned int line_number);
+void f_rotl(stack_t **stack, unsigned int line_number);
 void f_rotr(stack_t **stack, unsigned int line_number);
-void delete_end_node(stack_t **stack);
-void free_dlist(stack_t **stack);
-void addqueue(stack_t **head, int n);
-void f_queue(stack_t **head, unsigned int counter);
-void f_stack(stack_t **head, unsigned int counter);
 void (*get_op_func(char *token1))(stack_t **stack, unsigned int line_number);
+void f_stack(stack_t **head, unsigned int counter);
+void f_queue(stack_t **head, unsigned int counter);
+void addqueue(stack_t **head, int n);
+
 /** doubly linked list prototypes */
 int add_end_node(stack_t **stack, int n);
 void delete_end_node(stack_t **stack);

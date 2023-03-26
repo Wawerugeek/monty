@@ -14,12 +14,15 @@ void (*get_op_func(char *token1))(stack_t **stack, unsigned int line_number)
 		{"add", f_add},
 		{"sub", f_sub},
 		{"mul", f_mul},
-		{"div",f_div},
+		{"div", f_div},
 		{"mod", f_mod},
 		{"pchar", f_pchar},
+		{"pstr", f_pstr},
 		{"nop", f_nop},
-		{"rot1", f_rotl},
+		{"rotl", f_rotl},
 		{"rotr", f_rotr},
+		{"queue", f_queue},
+		{"stack", f_stack},
 		{NULL, NULL}
 	};
 	int i = 0;

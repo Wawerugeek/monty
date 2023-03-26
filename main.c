@@ -1,46 +1,34 @@
 #include "monty.h"
-bus_t bus = {NULL, NULL, NULL, 0};
+
 /**
- * main - entry to the interpreter
- * @argc: argument counter
- * @argv: argument vector
- * Return: On Success 0
+ * main - entry into interpreter
+ * @argc: argc counter
+ * @argv: arguments
+ * Return: 0 on success
  */
 int main(int argc, char *argv[])
 {
 	int fd, ispush = 0;
-	unsigned int line, counter = 0;
-	ssize_t n_read, read_line = 1;
-	size_t size = 0;
-	char *buffer, *token, *content;
-	FILE *file;
-	stack_t *h, *stack = NULL;
+	unsigned int line = 1;
+	ssize_t n_read;
+	char *buffer, *token;
+	stack_t *h = NULL;
 
 	if (argc != 2)
 	{
-		printf("Usage: monty file\n");
+		printf("USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	fd = open(argv[1], O_RDONLY);
-	file = fopen(argv[1], "r");
-	bus.file = file;
-
-	if (!file)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-
 	if (fd == -1)
 	{
 		printf("Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	buffer = malloc(sizeof(char) * 10000);
-
 	if (!buffer)
 		return (0);
-	n_read = read(fd, buffer, 1000);
+	n_read = read(fd, buffer, 10000);
 	if (n_read == -1)
 	{
 		free(buffer);
@@ -80,22 +68,7 @@ int main(int argc, char *argv[])
 		line++;
 		token = strtok(NULL, "\n\t\a\r ;:");
 	}
-	free_dlist(&h);
-	free(buffer);
+	free_dlist(&h); free(buffer);
 	close(fd);
-	while (read_line > 0)
-	{
-		content = NULL;
-		read_line = getline(&content, &size, file);
-		bus.content = content;
-		counter++;
-		if (read_line > 0)
-		{
-			execute(content, &stack, counter, file);
-		}
-		free(content);
-	}
-	free_stack(stack);
-	fclose(file);
-return (0);
+	return (0);
 }
